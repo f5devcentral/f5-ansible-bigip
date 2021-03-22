@@ -13,13 +13,13 @@ This collection is not currently published to Galaxy while feedback is collected
 **Note that this Collection is not currently intended to replace the existing |f5_modules| Collection.**
 
 
-Install from Github
-~~~~~~~~~~~~~~~~~~~
+Installing the Daily Build
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. code:: shell
 
-``ansible-galaxy collection install git+https://github.com/f5devcentral/f5-ansible-bigip.git#ansible_collections/f5networks/f5_bigip``
-
-|repoinstall|
-
+    ansible-galaxy collection install <collection name> -p ./collections
+    e.g.
+    ansible-galaxy collection install f5networks-f5_bigip-devel.tar.gz -p ./collections
 
 .. note::
 
@@ -78,5 +78,9 @@ See `License`_.
 .. |f5_modules| raw:: html
 
    <a href="https://galaxy.ansible.com/f5networks/f5_modules" target="_blank">f5_modules</a>
+
+.. |dailybuild| raw:: html
+
+   <a href="https://f5-ansible.s3.amazonaws.com/collections/f5networks-f5_bigip-devel.tar.gz" target="_blank">here</a>
 
 .. _License: https://github.com/f5devcentral/f5-ansible-bigip/blob/master/COPYING
