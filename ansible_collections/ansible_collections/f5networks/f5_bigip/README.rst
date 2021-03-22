@@ -10,8 +10,13 @@ This collection is not currently published to Galaxy while feedback is collected
 
 |
 
-**Note that this Collection is not currently intended to replace the existing |f5_modules| Collection.**
+**Note that this Collection is not currently intended to replace the existing** |f5_modules| **Collection.**
 
+Collections Daily Build
+-----------------------
+
+We offer a daily build of our most recent collection |dailybuild|. Please use this Collection to test the most
+recent Ansible module updates between releases.
 
 Installing the Daily Build
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -58,7 +63,7 @@ If you've got the time, consider sending an email that introduces yourself and w
 Copyright
 ---------
 
-Copyright 2020 F5 Networks Inc.
+Copyright 2021 F5 Networks Inc.
 
 
 License
