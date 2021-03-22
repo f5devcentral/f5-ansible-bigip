@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
-# Copyright: (c) 2020, F5 Networks Inc.
+# Copyright: (c) 2021, F5 Networks Inc.
 # GNU General Public License v3.0 (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
 from __future__ import absolute_import, division, print_function
@@ -32,7 +32,7 @@ options:
         the purpose of that filter is to format the JSON to be human-readable and this process
         includes inserting "extra characters that break JSON validators.
     type: raw
-  timeout:
+  async_timeout:
     description:
       - The amount of time in seconds to wait for the DO async interface to complete its task.
       - The accepted value range is between C(300) and C(3600) seconds.
@@ -62,7 +62,7 @@ EXAMPLES = r'''
 
   tasks:
     - name: Simple declaration no restart
-      bigip_do_deploy:
+      bigiq_do_deploy:
         content: "{{ lookup('file', 'do_simple_no_restart.json') }}"
 '''
 
@@ -116,12 +116,12 @@ class ModuleParameters(Parameters):
             return self._values['content']
 
     @property
-    def timeout(self):
+    def async_timeout(self):
         divisor = 100
-        timeout = self._values['timeout']
+        timeout = self._values['async_timeout']
         if timeout < 300 or timeout > 3600:
             raise F5ModuleError(
-                "Timeout value must be between 300 and 3600 seconds."
+                "Async_timeout value must be between 300 and 3600 seconds."
             )
 
         delay = timeout / divisor
@@ -214,7 +214,7 @@ class ModuleManager(object):
         return response['id']
 
     def async_wait(self, task_id):
-        delay, period = self.want.timeout
+        delay, period = self.want.async_timeout
         task = self.wait_for_task(task_id, delay, period)
         if task:
             if 'message' in task['result'] and task['result']['message'] == 'success':
@@ -254,8 +254,8 @@ class ModuleManager(object):
                     return response
             time.sleep(delay)
         raise F5ModuleError(
-            "Module timeout reached, state change is unknown, "
-            "please increase the timeout parameter for long lived actions."
+            "Module async_timeout reached, state change is unknown, "
+            "please increase the async_timeout parameter for long lived actions."
         )
 
 
@@ -264,7 +264,7 @@ class ArgumentSpec(object):
         self.supports_check_mode = True
         argument_spec = dict(
             content=dict(type='raw'),
-            timeout=dict(
+            async_timeout=dict(
                 type='int',
                 default=300
             ),
