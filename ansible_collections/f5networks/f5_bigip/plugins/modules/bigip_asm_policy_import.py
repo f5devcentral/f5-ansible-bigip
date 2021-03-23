@@ -215,7 +215,7 @@ from ..module_utils.common import (
     F5ModuleError, AnsibleF5Parameters, flatten_boolean, fq_name
 )
 from ..module_utils.client import (
-    F5Client, module_provisioned, tmos_version, send_teem
+    F5Client, module_provisioned, send_teem
 )
 
 
