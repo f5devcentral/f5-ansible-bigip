@@ -210,9 +210,7 @@ options:
     default: 'no'
     version_added: "1.2.0"
 notes:
-  - Abbreviated commands are NOT idempotent, see
-    L(Network FAQ,../network/user_guide/faq.html#why-do-the-config-modules-always-return-changed-true-with-
-    abbreviated-commands).
+  - Abbreviated commands are NOT idempotent
 author:
   - Wojciech Wypior (@wojtek0806)
 '''
