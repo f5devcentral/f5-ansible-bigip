@@ -15,7 +15,7 @@ description:
   - This HttpApi plugin provides methods to connect to BIG-IP
     devices over a HTTP(S)-based api.
 options:
-  provider:
+  bigip_provider:
     description:
     - The login provider used in communicating with BIG-IP devices when the API connection
       is first established.
@@ -35,7 +35,7 @@ options:
     - section: defaults
       key: f5_telemetry
     env:
-      - name: F5_TELEMETRY
+      - name: F5_TELEMETRY_OFF
     vars:
       - name: f5_telemetry
 version_added: "1.0"
@@ -69,7 +69,7 @@ class HttpApi(HttpApiBase):
         self.user = None
 
     def login(self, username, password):
-        provider = self.get_option("provider")
+        provider = self.get_option("bigip_provider")
 
         if username and password:
             payload = {

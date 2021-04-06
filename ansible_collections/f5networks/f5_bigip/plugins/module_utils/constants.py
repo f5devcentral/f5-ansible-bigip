@@ -24,10 +24,10 @@ PLATFORM = {
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 # This collection version needs to be updated at each release
-CURRENT_COLL_VERSION = '1.0'
+CURRENT_COLL_VERSION = '1.0.0'
 
 
 TEEM_ENDPOINT = 'product.apis.f5.com',
 TEEM_KEY = 'mmhJU2sCd63BznXAXDh4kxLIyfIMm3Ar'
 TEEM_TIMEOUT = 10
-TEEM_VERIFY = True
+TEEM_VERIFY = False

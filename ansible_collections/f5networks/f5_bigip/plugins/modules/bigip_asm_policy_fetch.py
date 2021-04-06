@@ -84,7 +84,7 @@ EXAMPLES = r'''
         file: export_foo
         dest: /root/download
         binary: yes
-    
+
     - name: Export policy inline base64 encoded format
       bigip_asm_policy_fetch:
         name: foobar
@@ -96,7 +96,7 @@ EXAMPLES = r'''
         name: foobar
         file: export_foo
         dest: /root/download
-    
+
     - name: Export compact policy in XML format
       bigip_asm_policy_fetch:
         name: foobar

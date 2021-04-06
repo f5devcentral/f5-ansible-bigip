@@ -829,7 +829,9 @@ from ansible.module_utils.six import (
 from ..module_utils.common import (
     F5ModuleError, AnsibleF5Parameters, flatten_boolean, transform_name
 )
-from ..module_utils.client import bigiq_version, F5Client
+from ..module_utils.client import (
+    bigiq_version, F5Client, send_teem
+)
 
 
 def parseStats(entry):
@@ -892,11 +894,13 @@ class BaseManager(object):
         self.kwargs = kwargs
 
     def exec_module(self):
+        start = datetime.datetime.now().isoformat()
         results = []
         facts = self.read_facts()
         for item in facts:
             attrs = item.to_return()
             results.append(attrs)
+        send_teem(self.client, start)
         return results
 
 

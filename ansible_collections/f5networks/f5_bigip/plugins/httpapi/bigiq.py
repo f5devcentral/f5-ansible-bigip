@@ -15,7 +15,7 @@ description:
   - This HttpApi plugin provides methods to connect to BIG-IQ
     devices over a HTTP(S)-based api.
 options:
-  provider:
+  bigiq_provider:
     description:
     - The login provider used in communicating with BIG-IQ devices when the API connection
       is first established.
@@ -36,7 +36,7 @@ options:
     - section: defaults
       key: f5_telemetry
     env:
-      - name: F5_TELEMETRY
+      - name: F5_TELEMETRY_OFF
     vars:
       - name: f5_telemetry
 version_added: "1.0"
@@ -66,7 +66,7 @@ class HttpApi(HttpApiBase):
         self.refresh_token = None
 
     def login(self, username, password):
-        provider = self.get_option("provider")
+        provider = self.get_option("bigiq_provider")
 
         if username and password:
             payload = {

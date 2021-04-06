@@ -72,9 +72,8 @@ notes:
     should be aware of how these Ansible products execute jobs in restricted
     environments. More information can be found here
     https://clouddocs.f5.com/products/orchestration/ansible/devel/usage/module-usage-with-tower.html
-  - Some longer running tasks might cause the REST interface on BIG-IP to time out, to avoid this adjust the timers as 
-    per this KB article
-    https://support.f5.com/csp/article/K94602685
+  - Some longer running tasks might cause the REST interface on BIG-IP to time out, to avoid this adjust the timers as
+    per this KB article https://support.f5.com/csp/article/K94602685
 author:
   - Wojciech Wypior (@wojtek0806)
 '''
@@ -163,11 +162,14 @@ size:
 import os
 import tempfile
 import time
+from datetime import datetime
 
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.connection import Connection
 
-from ..module_utils.client import F5Client
+from ..module_utils.client import (
+    F5Client, send_teem
+)
 
 from ..module_utils.common import (
     F5ModuleError, AnsibleF5Parameters,
@@ -262,6 +264,7 @@ class ModuleManager(object):
         self.changes = UsableChanges()
 
     def exec_module(self):
+        start = datetime.now().isoformat()
         result = dict()
 
         self.present()
@@ -270,6 +273,7 @@ class ModuleManager(object):
         changes = reportable.to_return()
         result.update(**changes)
         result.update(dict(changed=True))
+        send_teem(self.client, start)
         return result
 
     def present(self):
