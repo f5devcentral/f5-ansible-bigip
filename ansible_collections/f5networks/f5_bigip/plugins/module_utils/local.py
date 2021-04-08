@@ -119,6 +119,7 @@ class F5BaseClient(object):
         self.merge_provider_auth_provider_param(result, provider)
         self.merge_provider_user_param(result, provider)
         self.merge_provider_password_param(result, provider)
+        self.merge_provider_no_f5_teem_param(result, provider)
 
         return result
 
@@ -192,6 +193,19 @@ class F5BaseClient(object):
             result['password'] = os.environ.get('ANSIBLE_NET_PASSWORD')
         else:
             result['password'] = None
+
+    def merge_provider_no_f5_teem_param(self, result, provider):
+        if self.validate_params('no_f5_teem', provider):
+            result['no_f5_teem'] = provider['no_f5_teem']
+        elif self.validate_params('F5_TELEMETRY_OFF', os.environ):
+            result['no_f5_teem'] = os.environ['F5_TELEMETRY_OFF']
+        else:
+            result['no_f5_teem'] = False
+
+        if result['no_f5_teem'] in BOOLEANS_TRUE:
+            result['no_f5_teem'] = True
+        else:
+            result['no_f5_teem'] = False
 
 
 class Response(object):
